@@ -19,10 +19,9 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  # Project site — served from a sub-path. On a custom domain, set the base
-  # path to "" and the site URL to the domain.
-  NEXT_PUBLIC_BASE_PATH: /perpendikular.com
-  NEXT_PUBLIC_SITE_URL: https://kubegraf.github.io/perpendikular.com
+  # Custom domain — served from the root, so no base path.
+  NEXT_PUBLIC_BASE_PATH: ""
+  NEXT_PUBLIC_SITE_URL: https://perpendikular.com
 
 jobs:
   deploy:
@@ -55,7 +54,8 @@ jobs:
           test -f out/index.html
           test -f out/.nojekyll
           test -f out/og.png
-          grep -q '"/perpendikular.com/_next' out/index.html
+          test -f out/CNAME
+          grep -q '"/_next' out/index.html
           echo "export ok: $(find out -type f | wc -l) files"
 
       - name: Publish to gh-pages
