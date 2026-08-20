@@ -16,9 +16,9 @@ function Mark({ scale = 1 }: { scale?: number }) {
   const s = (n: number) => n * scale;
   return (
     <div style={{ display: "flex", position: "relative", width: s(64), height: s(64) }}>
-      <div style={{ position: "absolute", left: s(30.6), top: s(4), width: s(3.5), height: s(20), background: FG, borderRadius: s(2) }} />
-      <div style={{ position: "absolute", left: s(40), top: s(30.6), width: s(20), height: s(3.5), background: FG, borderRadius: s(2) }} />
-      <div style={{ position: "absolute", left: s(9), top: s(45), width: s(22), height: s(3.5), background: FG, borderRadius: s(2), transform: "rotate(-45deg)" }} />
+      <div style={{ position: "absolute", left: s(30.6), top: s(4), width: s(3.5), height: s(22), background: FG, borderRadius: s(2) }} />
+      <div style={{ position: "absolute", left: s(38.4), top: s(30.6), width: s(21.6), height: s(3.5), background: FG, borderRadius: s(2) }} />
+      <div style={{ position: "absolute", left: s(8.6), top: s(42.6), width: s(22), height: s(3.5), background: FG, borderRadius: s(2), transform: "rotate(-45deg)" }} />
       <div style={{ position: "absolute", left: s(25.6), top: s(25.6), width: s(13), height: s(13), background: ACCENT, borderRadius: s(13) }} />
     </div>
   );
