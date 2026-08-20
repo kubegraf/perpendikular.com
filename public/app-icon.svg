@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" fill="none" role="img" aria-label="Perpendikular app icon">
+  <rect width="512" height="512" rx="112" fill="#08090b"/>
+  <rect x="0.5" y="0.5" width="511" height="511" rx="111.5" stroke="#22262f"/>
+  <g stroke="#edeff3" stroke-width="26" stroke-linecap="round">
+    <path d="M256 118V204"/>
+    <path d="M394 256H308"/>
+    <path d="M148 364 216 296"/>
+  </g>
+  <circle cx="256" cy="256" r="34" fill="#6b8afb"/>
+</svg>
