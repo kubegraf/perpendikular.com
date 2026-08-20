@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
+import { absoluteUrl, basePath, siteUrl } from "@/lib/site";
 import "./globals.css";
 
 const inter = Inter({
@@ -15,7 +16,6 @@ const mono = JetBrains_Mono({
   variable: "--font-mono-face",
 });
 
-const siteUrl = "https://perpendikular.com";
 const description =
   "Perpendikular challenges assumptions, explores opposing perspectives, detects blind spots, and turns complex questions into decisions you can defend.";
 
@@ -41,22 +41,31 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
-    url: siteUrl,
+    url: `${siteUrl}/`,
     siteName: "Perpendikular",
     title: "Perpendikular — AI that sees every angle",
     description,
     locale: "en_GB",
+    images: [
+      {
+        url: absoluteUrl("/og.png"),
+        width: 1200,
+        height: 630,
+        alt: "Perpendikular — AI that sees every angle",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Perpendikular — AI that sees every angle",
     description,
     creator: "@perpendikular",
+    images: [absoluteUrl("/og.png")],
   },
   icons: {
-    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
-    shortcut: "/icon.svg",
-    apple: "/apple-icon",
+    icon: [{ url: `${basePath}/favicon.svg`, type: "image/svg+xml" }],
+    shortcut: `${basePath}/favicon.svg`,
+    apple: [{ url: `${basePath}/apple-touch-icon.png`, sizes: "180x180" }],
   },
   robots: {
     index: true,

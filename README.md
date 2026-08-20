@@ -19,11 +19,46 @@ Marketing site for **PERPENDIKULAR** — a decision-intelligence platform.
 ```bash
 npm install
 npm run dev        # http://localhost:3000
-npm run build      # production build
-npm run start      # serve the production build
+npm run build      # static export into ./out
+npm run preview    # serve ./out at http://localhost:3100
 npm run lint       # eslint (next/core-web-vitals + typescript)
 npm run typecheck  # tsc --noEmit
 ```
+
+## Deployment
+
+The site is a fully static export (`output: "export"`), published to GitHub
+Pages by `.github/workflows/deploy.yml` on every push to `main`:
+
+**https://kubegraf.github.io/perpendikular.com**
+
+Pages serves a project site from a sub-path, so the build takes its location
+from two environment variables, both supplied by `actions/configure-pages`:
+
+| Variable | Pages value | Default |
+| --- | --- | --- |
+| `NEXT_PUBLIC_BASE_PATH` | `/perpendikular.com` | `""` |
+| `NEXT_PUBLIC_SITE_URL` | `https://kubegraf.github.io/perpendikular.com` | `https://perpendikular.com` |
+
+Nothing is hard-coded: attach a custom domain and `base_path` becomes empty,
+`base_url` becomes the domain, and the next build picks both up.
+
+Two details worth knowing before changing them:
+
+- The OpenGraph card and Apple touch icon are route handlers named
+  `app/og.png/` and `app/apple-touch-icon.png/`, not Next's
+  `opengraph-image` / `apple-icon` conventions. A static export names each
+  file after its route, and a file without a `.png` extension is served as
+  `application/octet-stream` — which social scrapers reject.
+- `public/.nojekyll` stops Pages from hiding the `_next` directory.
+
+To publish for the first time, set **Settings → Pages → Source** to
+**GitHub Actions**. The workflow passes `enablement: true`, so it will try to
+do this itself on the first run.
+
+`robots.txt` and `sitemap.xml` are emitted under the sub-path. Crawlers only
+read `robots.txt` at a domain root, so it takes effect once the site moves to
+its own domain.
 
 ## Structure
 

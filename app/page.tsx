@@ -1,3 +1,4 @@
+import { siteUrl } from "@/lib/site";
 import { Navbar } from "@/components/navbar";
 import { Hero } from "@/components/hero";
 import { PerspectiveGrid } from "@/components/perspective-grid";
@@ -19,10 +20,10 @@ const jsonLd = {
   "@graph": [
     {
       "@type": "Organization",
-      "@id": "https://perpendikular.com/#organization",
+      "@id": `${siteUrl}/#organization`,
       name: "Perpendikular",
-      url: "https://perpendikular.com",
-      logo: "https://perpendikular.com/logo.svg",
+      url: siteUrl,
+      logo: `${siteUrl}/logo.svg`,
       slogan: "AI that sees every angle.",
     },
     {
@@ -32,7 +33,7 @@ const jsonLd = {
       operatingSystem: "Web",
       description:
         "A decision-intelligence platform that analyses a question from multiple independent perspectives, challenges assumptions, detects contradictions and blind spots, and produces a structured, defensible recommendation.",
-      publisher: { "@id": "https://perpendikular.com/#organization" },
+      publisher: { "@id": `${siteUrl}/#organization` },
       offers: [
         { "@type": "Offer", name: "Free", price: "0", priceCurrency: "GBP" },
         { "@type": "Offer", name: "Pro", price: "24", priceCurrency: "GBP" },

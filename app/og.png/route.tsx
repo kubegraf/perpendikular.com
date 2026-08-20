@@ -1,8 +1,10 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Perpendikular — AI that sees every angle";
+// A route rather than the opengraph-image convention: a static export names
+// the file after the route, and social scrapers need the .png extension.
+export const dynamic = "force-static";
+
 export const size = { width: 1200, height: 630 };
-export const contentType = "image/png";
 
 const FG = "#edeff3";
 const MUTED = "#8b909b";
@@ -22,7 +24,7 @@ function Mark({ scale = 1 }: { scale?: number }) {
   );
 }
 
-export default function OpengraphImage() {
+export function GET() {
   return new ImageResponse(
     (
       <div

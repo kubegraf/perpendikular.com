@@ -1,6 +1,9 @@
 import type { MetadataRoute } from "next";
+import { siteUrl } from "@/lib/site";
 
-const base = "https://perpendikular.com";
+export const dynamic = "force-static";
+
+const base = siteUrl;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date("2026-01-01");
