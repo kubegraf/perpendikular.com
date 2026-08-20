@@ -27,21 +27,32 @@ npm run typecheck  # tsc --noEmit
 
 ## Deployment
 
-The site is a fully static export (`output: "export"`), published to GitHub
-Pages by `.github/workflows/deploy.yml` on every push to `main`:
+The site is a fully static export (`output: "export"`). On every push to
+`main`, `.github/workflows/deploy.yml` builds it and force-pushes `out/` to
+the **`gh-pages`** branch, which GitHub Pages serves at:
 
 **https://kubegraf.github.io/perpendikular.com**
 
+Pages must be pointed at that branch once, by a repository admin:
+**Settings → Pages → Build and deployment → Source: Deploy from a branch →
+`gh-pages` / `(root)`**.
+
+The workflow publishes over plain git rather than `actions/deploy-pages`
+deliberately. That action needs an OIDC token this repository does not issue
+(`id-token: write` is requested but not granted), and `actions/configure-pages`
+with `enablement: true` calls an admin-only REST endpoint that `GITHUB_TOKEN`
+is never allowed to reach. Pushing a branch needs only `contents: write`.
+
 Pages serves a project site from a sub-path, so the build takes its location
-from two environment variables, both supplied by `actions/configure-pages`:
+from two environment variables, set at the top of the workflow:
 
 | Variable | Pages value | Default |
 | --- | --- | --- |
 | `NEXT_PUBLIC_BASE_PATH` | `/perpendikular.com` | `""` |
 | `NEXT_PUBLIC_SITE_URL` | `https://kubegraf.github.io/perpendikular.com` | `https://perpendikular.com` |
 
-Nothing is hard-coded: attach a custom domain and `base_path` becomes empty,
-`base_url` becomes the domain, and the next build picks both up.
+Moving to a custom domain means clearing the base path and setting the site
+URL to the domain — nothing in the source changes.
 
 Two details worth knowing before changing them:
 
@@ -51,10 +62,6 @@ Two details worth knowing before changing them:
   file after its route, and a file without a `.png` extension is served as
   `application/octet-stream` — which social scrapers reject.
 - `public/.nojekyll` stops Pages from hiding the `_next` directory.
-
-To publish for the first time, set **Settings → Pages → Source** to
-**GitHub Actions**. The workflow passes `enablement: true`, so it will try to
-do this itself on the first run.
 
 `robots.txt` and `sitemap.xml` are emitted under the sub-path. Crawlers only
 read `robots.txt` at a domain root, so it takes effect once the site moves to
