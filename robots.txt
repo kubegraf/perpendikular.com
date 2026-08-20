@@ -1,0 +1,5 @@
+User-Agent: *
+Allow: /
+
+Host: https://perpendikular.com
+Sitemap: https://perpendikular.com/sitemap.xml
